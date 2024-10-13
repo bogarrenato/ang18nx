@@ -1,14 +1,26 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { CounterStore } from './counterstore/counter-store';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
+  providers: [CounterStore],
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'materialapp2';
+  readonly counterStore = inject(CounterStore);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+
+  countUp(): void {
+    this.counterStore.increment();
+  }
+
+  navigateToTrainers(): void {
+    this.router.navigate(['trainers'], { relativeTo: this.activatedRoute });
+  }
 }

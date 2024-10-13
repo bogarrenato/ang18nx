@@ -1,1 +1,6 @@
-<app-nx-welcome></app-nx-welcome> <router-outlet></router-outlet>
+<div class="app-wrapper">
+  <button (click)="navigateToTrainers()">navigate to trainers</button>
+  <router-outlet></router-outlet>
+  <button (click)="countUp()">qweqweqwe</button>
+  <p>{{ counterStore.count() }}</p>
+</div>
